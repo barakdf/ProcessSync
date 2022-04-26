@@ -127,7 +127,7 @@ void *send_hello(void *arg) {
 }
 
 void *server_listener(void *arg) {
-    int *s = (int *) arg;
+    int *s = (int *)arg;
     if (send(*s, "Hello, world!", 13, 0) == -1) {
         perror("send");
     }
@@ -141,7 +141,6 @@ void *server_listener(void *arg) {
             exit(1);
         }
         if (r != 0) {
-
             /** --------------------------------- STACK SECTION ---------------------------------*/
 
             /**------------ TOP ------------*/
@@ -291,12 +290,12 @@ int main(void) {
         printf("server: got connection from %s\n", s);
 
 
-    }
-    if (!fork()) { // this is the child process
-        close(sockfd); // child doesn't need the listener
-        server_listener(&new_fd);
-        close(new_fd);
-        exit(0);
+        if (!fork()) { // this is the child process
+//        close(sockfd); // child doesn't need the listener
+            server_listener(&new_fd);
+            close(new_fd);
+            exit(0);
+        }
     }
     close(new_fd);  // parent doesn't need this
 

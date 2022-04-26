@@ -37,8 +37,7 @@ void *get_in_addr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 //    int desc = dup(1); // close stout
     int c_sock, numbytes;
     char buf[MAXDATASIZE];
@@ -108,6 +107,7 @@ int main(int argc, char *argv[])
         //s-size_t type to be able to receive value -1 // size of the input  line
         ssize_t line_size = getline(&command, &size, stdin);
         command[line_size - 1] = '\0';
+//        printf("%s\n", command);
 
 
         if(strcmp("EXIT", command) == EQUAL) {
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
         }
 
         if (strcmp("TOP", command) == EQUAL || strcmp("PEEK", command) == EQUAL ) {
-//            printf("%s", command);
+//            printf("%s\n", command);
 //            printf("print client \n ");
             /* send the TOP command to the server */
             send(c_sock, command, text_length, 0);
@@ -149,7 +149,6 @@ int main(int argc, char *argv[])
         }
 
     }
-
     close(c_sock);
 
     return 0;
