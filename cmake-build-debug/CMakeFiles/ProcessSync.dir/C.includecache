@@ -6,37 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/97252/Documents/GitHub/ProcessSync/client.c
-stdio.h
--
-stdlib.h
--
-unistd.h
--
-errno.h
--
-string.h
--
-netdb.h
--
-sys/types.h
--
-netinet/in.h
--
-sys/socket.h
--
-assert.h
-/mnt/c/Users/97252/Documents/GitHub/ProcessSync/assert.h
-arpa/inet.h
--
-
 /mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.c
 stdio.h
 -
 stack.h
 /mnt/c/Users/97252/Documents/GitHub/ProcessSync/stack.h
-stdlib.h
--
 unistd.h
 -
 errno.h

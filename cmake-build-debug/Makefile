@@ -123,33 +123,6 @@ ProcessSync/fast:
 	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/build
 .PHONY : ProcessSync/fast
 
-client.o: client.c.o
-
-.PHONY : client.o
-
-# target to build an object file
-client.c.o:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/client.c.o
-.PHONY : client.c.o
-
-client.i: client.c.i
-
-.PHONY : client.i
-
-# target to preprocess a source file
-client.c.i:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/client.c.i
-.PHONY : client.c.i
-
-client.s: client.c.s
-
-.PHONY : client.s
-
-# target to generate assembly for a file
-client.c.s:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/client.c.s
-.PHONY : client.c.s
-
 server.o: server.c.o
 
 .PHONY : server.o
@@ -177,33 +150,6 @@ server.c.s:
 	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/server.c.s
 .PHONY : server.c.s
 
-stack.o: stack.c.o
-
-.PHONY : stack.o
-
-# target to build an object file
-stack.c.o:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/stack.c.o
-.PHONY : stack.c.o
-
-stack.i: stack.c.i
-
-.PHONY : stack.i
-
-# target to preprocess a source file
-stack.c.i:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/stack.c.i
-.PHONY : stack.c.i
-
-stack.s: stack.c.s
-
-.PHONY : stack.s
-
-# target to generate assembly for a file
-stack.c.s:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/stack.c.s
-.PHONY : stack.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ProcessSync"
-	@echo "... client.o"
-	@echo "... client.i"
-	@echo "... client.s"
 	@echo "... server.o"
 	@echo "... server.i"
 	@echo "... server.s"
-	@echo "... stack.o"
-	@echo "... stack.i"
-	@echo "... stack.s"
 .PHONY : help
 
 

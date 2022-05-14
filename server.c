@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include "stack.h"
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
@@ -25,8 +25,7 @@
 #include "stack.c"
 #include <unistd.h>
 #include "assert.h"
-//#include "malloc.h"
-//#include "malloc.c"
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -46,7 +45,7 @@ int fd;
 
 
 void sig_handler(int signum) {
-    free_stack(&shared_st);
+//    free_stack(&shared_st);
     server_running = 0;
     close(new_fd);
 
@@ -156,20 +155,19 @@ void *server_listener(void *arg) {
     }
 }
 
-int *i;
 
 int main(void) {
 //    int test_status = test();
     /* INIT the server shared stack */
 //    shared_st = (Stack *) malloc(sizeof(Stack));
 
-
-    shared_st = mmap(NULL, sizeof(Stack), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-    shared_st->head = mmap(NULL, sizeof(node), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    shared_st = (Stack *)mmap(NULL, sizeof (Stack), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
+    stack_Init(&shared_st);
 
 
     memset(&lock, 0, sizeof(lock));
-    shared_st->head = NULL;
+//    shared_st->head = NULL;
+
 
 
     int status;

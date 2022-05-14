@@ -7,25 +7,30 @@
 
 #define text_length 1024
 
+typedef struct node {
+    char data[text_length];
+    struct node *next;
+} node;
 
-    typedef struct node {
-        char data[text_length];
-        struct node *next;
-    } node;
 
+typedef struct stack {
+    char *st_adrr;
+    node *head;
+    int size;
+} Stack;
 
-    typedef struct stack{
-        node* head;
-        int size;
-    } Stack;
+void printStack(Stack **stack);
 
-    void printStack(Stack** stack);
+void stack_Init(Stack **pStack);
 
-    char*top(Stack** stack);
+void * stack_malloc(Stack **pStack);
 
-    void push(Stack** top ,char* text);
+char *top(Stack **stack);
 
-    void pop(Stack** stack);
+void push(Stack **top, char *text);
 
-    void free_stack(Stack** stack);
+void pop(Stack **stack);
+
+void free_stack(Stack **stack);
+
 #endif //THREADS_STACK_H
