@@ -9,15 +9,20 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <assert.h>
+#include <sys/mman.h>
 
+#define max 1024
 void push(Stack **stack, char *text) {
     /*old malloc */
 //    node *new_node = (node *) malloc(sizeof(node));
     /*new malloc*/
-    node *new_node = (node *) malloc(sizeof(node));
+    node *new_node = (node *) malloc( sizeof(node));
+  //  node new_node[max];// (node*)mmap(NULL, sizeof(node) , PROT_READ | PROT_WRITE, MAP_SHARED |  MAP_ANONYMOUS, -1, 0);
+
     strcpy(new_node->data, text);
 
     if ((*stack)->head == NULL) {
+
         (*stack)->head = new_node;
         new_node->next = NULL;
 

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/barak/Documents/GitHub/ProcessSync
+CMAKE_SOURCE_DIR = /mnt/c/Users/97252/Documents/GitHub/ProcessSync
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug
+CMAKE_BINARY_DIR = /mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ProcessSync.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/ProcessSync.dir/flags.make
 
 CMakeFiles/ProcessSync.dir/server.c.o: CMakeFiles/ProcessSync.dir/flags.make
 CMakeFiles/ProcessSync.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ProcessSync.dir/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ProcessSync.dir/server.c.o   -c /mnt/c/Users/barak/Documents/GitHub/ProcessSync/server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ProcessSync.dir/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ProcessSync.dir/server.c.o   -c /mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.c
 
 CMakeFiles/ProcessSync.dir/server.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProcessSync.dir/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/barak/Documents/GitHub/ProcessSync/server.c > CMakeFiles/ProcessSync.dir/server.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.c > CMakeFiles/ProcessSync.dir/server.c.i
 
 CMakeFiles/ProcessSync.dir/server.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProcessSync.dir/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/barak/Documents/GitHub/ProcessSync/server.c -o CMakeFiles/ProcessSync.dir/server.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.c -o CMakeFiles/ProcessSync.dir/server.c.s
 
 CMakeFiles/ProcessSync.dir/stack.c.o: CMakeFiles/ProcessSync.dir/flags.make
 CMakeFiles/ProcessSync.dir/stack.c.o: ../stack.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ProcessSync.dir/stack.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ProcessSync.dir/stack.c.o   -c /mnt/c/Users/barak/Documents/GitHub/ProcessSync/stack.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ProcessSync.dir/stack.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ProcessSync.dir/stack.c.o   -c /mnt/c/Users/97252/Documents/GitHub/ProcessSync/stack.c
 
 CMakeFiles/ProcessSync.dir/stack.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProcessSync.dir/stack.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/barak/Documents/GitHub/ProcessSync/stack.c > CMakeFiles/ProcessSync.dir/stack.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/97252/Documents/GitHub/ProcessSync/stack.c > CMakeFiles/ProcessSync.dir/stack.c.i
 
 CMakeFiles/ProcessSync.dir/stack.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProcessSync.dir/stack.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/barak/Documents/GitHub/ProcessSync/stack.c -o CMakeFiles/ProcessSync.dir/stack.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/97252/Documents/GitHub/ProcessSync/stack.c -o CMakeFiles/ProcessSync.dir/stack.c.s
 
 CMakeFiles/ProcessSync.dir/client.c.o: CMakeFiles/ProcessSync.dir/flags.make
 CMakeFiles/ProcessSync.dir/client.c.o: ../client.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ProcessSync.dir/client.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ProcessSync.dir/client.c.o   -c /mnt/c/Users/barak/Documents/GitHub/ProcessSync/client.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ProcessSync.dir/client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ProcessSync.dir/client.c.o   -c /mnt/c/Users/97252/Documents/GitHub/ProcessSync/client.c
 
 CMakeFiles/ProcessSync.dir/client.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProcessSync.dir/client.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/barak/Documents/GitHub/ProcessSync/client.c > CMakeFiles/ProcessSync.dir/client.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/97252/Documents/GitHub/ProcessSync/client.c > CMakeFiles/ProcessSync.dir/client.c.i
 
 CMakeFiles/ProcessSync.dir/client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProcessSync.dir/client.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/barak/Documents/GitHub/ProcessSync/client.c -o CMakeFiles/ProcessSync.dir/client.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/97252/Documents/GitHub/ProcessSync/client.c -o CMakeFiles/ProcessSync.dir/client.c.s
 
 # Object files for target ProcessSync
 ProcessSync_OBJECTS = \
@@ -110,7 +110,7 @@ ProcessSync: CMakeFiles/ProcessSync.dir/stack.c.o
 ProcessSync: CMakeFiles/ProcessSync.dir/client.c.o
 ProcessSync: CMakeFiles/ProcessSync.dir/build.make
 ProcessSync: CMakeFiles/ProcessSync.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable ProcessSync"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable ProcessSync"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ProcessSync.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +123,6 @@ CMakeFiles/ProcessSync.dir/clean:
 .PHONY : CMakeFiles/ProcessSync.dir/clean
 
 CMakeFiles/ProcessSync.dir/depend:
-	cd /mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/barak/Documents/GitHub/ProcessSync /mnt/c/Users/barak/Documents/GitHub/ProcessSync /mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug /mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug /mnt/c/Users/barak/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles/ProcessSync.dir/DependInfo.cmake --color=$(COLOR)
+	cd /mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/97252/Documents/GitHub/ProcessSync /mnt/c/Users/97252/Documents/GitHub/ProcessSync /mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug /mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug /mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles/ProcessSync.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ProcessSync.dir/depend
 

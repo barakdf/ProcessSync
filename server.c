@@ -1,12 +1,4 @@
 //
-// Created by barak on 26/04/2022.
-//
-
-//
-// Created by barak on 15/04/2022.
-//
-
-//
 // Created by 97252 on 4/14/2022.
 //
 
@@ -29,11 +21,16 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <pthread.h>
+#include <fcntl.h>
 #include "stack.c"
-
+#include <unistd.h>
 #include "assert.h"
 //#include "malloc.h"
 //#include "malloc.c"
+#include <stdio.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include "sys/mman.h"
 
 #define PORT "3490"  // the port users will be connecting to
 
@@ -43,50 +40,10 @@ Stack *test_st;
 int server_running = 1;
 int sockfd;
 int new_fd;
+struct flock lock;
 
-/* Stack Thread safety handlers */
+int fd;
 
-
-//int test() {
-//
-//    test_st = (Stack *) my_malloc(sizeof(Stack));
-//
-//    /* checking allocation correctness */
-//    void *new_address = sbrk(0);
-//    assert((int *) test_st != (int *) new_address);
-//
-//    printf("Passed Allocation tests\n");
-//    /* push one string to stack.
-//     * check if the top of the stack matches the last value pushed, expected --> "test1"*/
-//    push(&test_st, "test1");
-//    assert(strcmp(top(&test_st), "test1") == 0);
-//    /* push another string to the stack.
-//     * check if the top value updated, expected --> "test2".
-//     * check if the size updated, expected --> 2.*/
-//    push(&test_st, "test2");
-//    assert(test_st->size == 2);
-//    assert(strcmp(top(&test_st), "test2") == 0);
-//
-//
-//    /* POP until stack is empty
-//     * check size, expected --> 0
-//     * check top on empty stack, expected --> ERROR message on empty stack*/
-//    pop(&test_st);
-//    pop(&test_st);
-//    assert(test_st->size == 0);
-//    assert(strcmp(top(&test_st), "ERROR: Stack is empty") == EQUAL);
-//
-//    /* check case when call pop on empty stack,
-//     * expected --> no change on stack, return string with ERROR prefix*/
-//    pop(&test_st);
-//    assert(test_st->size == 0);
-//    assert(strcmp(top(&test_st), "ERROR: Stack is empty") == EQUAL);
-//
-//    free_stack(&test_st);
-//    printf("Passed all stack tests.\n");
-//    printf("server initializing...\n");
-//    return 1;
-//}
 
 void sig_handler(int signum) {
     free_stack(&shared_st);
@@ -127,19 +84,24 @@ void *send_hello(void *arg) {
 }
 
 void *server_listener(void *arg) {
-    int *s = (int *)arg;
+    int *s = (int *) arg;
     if (send(*s, "Hello, world!", 13, 0) == -1) {
         perror("send");
     }
     char client_msg[text_length] = {0}; // '\0'
 
+
     while (1) {
+
         memset(client_msg, 0, text_length);
-        size_t r;
+        size_t r; //size of byte
+
         if ((r = recv(*s, client_msg, sizeof(client_msg), 0)) == -1) {
             perror("recv");
             exit(1);
         }
+
+
         if (r != 0) {
             /** --------------------------------- STACK SECTION ---------------------------------*/
 
@@ -188,14 +150,25 @@ void *server_listener(void *arg) {
         } else {
             break;
         }
+
+//        lock.l_type = F_ULOCK;
+//        fcntl(fd,F_SETLKW, &lock);
     }
 }
 
+int *i;
 
 int main(void) {
 //    int test_status = test();
     /* INIT the server shared stack */
-    shared_st = (Stack *) malloc(sizeof(Stack));
+//    shared_st = (Stack *) malloc(sizeof(Stack));
+
+
+    shared_st = mmap(NULL, sizeof(Stack), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    shared_st->head = mmap(NULL, sizeof(node), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+
+
+    memset(&lock, 0, sizeof(lock));
     shared_st->head = NULL;
 
 
@@ -269,11 +242,6 @@ int main(void) {
 
     printf("server: waiting for connections...\n");
 
-    /* initializing array of threads with size of 10(the max of concurrency clients).
-     * also init unsigned long thread_num to be the index of each thread
-     * that will serve the current connection with the client*/
-    pthread_t client_h[BACKLOG];
-    unsigned long thread_num = 1;
 
     while (server_running) {  // main accept() loop
         sin_size = sizeof their_addr;
@@ -292,9 +260,20 @@ int main(void) {
 
         if (!fork()) { // this is the child process
 //        close(sockfd); // child doesn't need the listener
+
+
+//            fd = open("demo.txt",O_WRONLY);
+//            printf(" init lock \n");
+//            lock.l_type = F_WRLCK;
+//            fcntl(fd,F_SETLKW, &lock);
+//            printf( " lock \n");
             server_listener(&new_fd);
+
+
             close(new_fd);
             exit(0);
+
+
         }
     }
     close(new_fd);  // parent doesn't need this
