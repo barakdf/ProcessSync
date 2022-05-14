@@ -76,6 +76,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/mnt/c/Users/97252/Documents/GitHub/ProcessSync/TEST.cpp">
+			<Option target="ProcessSync"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/97252/Documents/GitHub/ProcessSync/TEST.hpp">
+			<Option target="ProcessSync"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.c">
 			<Option target="ProcessSync"/>
 		</Unit>

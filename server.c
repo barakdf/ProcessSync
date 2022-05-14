@@ -39,10 +39,7 @@ Stack *test_st;
 int server_running = 1;
 int sockfd;
 int new_fd;
-struct flock lock;
-
-int fd;
-
+pid_t child_pid;
 
 
 void sig_handler(int signum) {
@@ -86,6 +83,8 @@ void *send_hello(void *arg) {
 
 void *server_listener(void *arg) {
     int *s = (int *) arg;
+
+
     if (send(*s, "Hello, world!", 13, 0) == -1) {
         perror("send");
     }
@@ -93,8 +92,12 @@ void *server_listener(void *arg) {
 
 
 
+
     while (1) {
 
+//        memset(&lock, 0, sizeof(lock));
+//        lock.l_type = F_WRLCK;
+//        fcntl((*s), F_SETLK, &lock);
         memset(client_msg, 0, text_length);
         size_t r; //size of byte
 
@@ -106,11 +109,7 @@ void *server_listener(void *arg) {
 
         if (r != 0) {
             /** --------------------------------- STACK SECTION ---------------------------------*/
-            fd = open("./demo.txt", O_WRONLY);
-            memset(&lock, 0, sizeof(lock));
-            lock.l_type = F_WRLCK;
-            fcntl(fd, F_SETLKW, &lock);
-            printf(" lock  \n");
+
 
 
 
@@ -157,10 +156,6 @@ void *server_listener(void *arg) {
                 /* ~END~ Write DATA CRITICAL SECTION */
 
             }
-            sleep(3);
-            printf("unlock \n ");
-            lock.l_type = F_ULOCK;
-            fcntl(fd, F_SETLKW, &lock);
 
 
         } else {
@@ -179,9 +174,6 @@ int main(void) {
 
     shared_st = (Stack *) mmap(NULL, sizeof(Stack), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
     stack_Init(&shared_st);
-
-
-
 
 
     int status;
@@ -253,10 +245,14 @@ int main(void) {
     }
 
     printf("server: waiting for connections...\n");
+    struct flock lock;
+    memset(&lock, 0, sizeof(lock));
 
 
     while (server_running) {  // main accept() loop
         sin_size = sizeof their_addr;
+
+
         new_fd = accept(sockfd, (struct sockaddr *) &their_addr, &sin_size);
         if (new_fd == -1) {
             perror("accept");
@@ -270,26 +266,36 @@ int main(void) {
         printf("server: got connection from %s\n", s);
 
 
-
-
-        if (!fork()) { // this is the child process
+        if ((child_pid = fork()) == 0) { // this is the child process
 //        close(sockfd); // child doesn't need the listener
+            while (1) {
+                lock.l_type = F_WRLCK;
+                fcntl(new_fd, F_SETLK, &lock);
+                printf(" init lock \n");
 
-            printf(" init lock \n");
 
-            server_listener(&new_fd);
+                printf(" lock  \n");
+                server_listener(&new_fd);
 
 
+
+//            close(new_fd);
+//            exit(0);
+
+                lock.l_type = F_UNLCK;
+                fcntl(new_fd, F_SETLKW, &lock);
+                printf("unlock \n");
+            }
             close(new_fd);
-            exit(0);
-
-
         }
-    }
-    close(new_fd);  // parent doesn't need this
+//            wait(NULL);
+//            close(new_fd);
 
+    }
+// parent doesn't need this
     return 0;
 }
+
 
 
 
