@@ -45,7 +45,8 @@ int fd;
 
 
 void sig_handler(int signum) {
-//    free_stack(&shared_st);
+    free_stack(&shared_st);
+    munmap(&shared_st,sizeof (Stack));
     server_running = 0;
     close(new_fd);
 

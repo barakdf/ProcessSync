@@ -19,16 +19,17 @@ void stack_Init(Stack **pStack) {
         perror("Error On MAP\n");
         exit(0);
     }
-    (*pStack)->st_adrr = memory_ptr;
+    (*pStack)->st_addr = memory_ptr;
+    (*pStack)->init_addr = memory_ptr;
 }
 
 void *stack_malloc(Stack **pStack) {
-    (*pStack)->st_adrr += sizeof(node);
-    return (*pStack)->st_adrr;
+    (*pStack)->st_addr += sizeof(node);
+    return (*pStack)->st_addr;
 }
 
 void stack_free(Stack **pStack) {
-    (*pStack)->st_adrr -= sizeof(node);
+    (*pStack)->st_addr -= sizeof(node);
 }
 
 void push(Stack **stack, char *text) {
@@ -81,8 +82,8 @@ char *top(Stack **stack) {
     return (*stack)->head->data;
 }
 
-//void free_stack(Stack **stack) {
-//
+void free_stack(Stack **stack) {
+
 //    while ((*stack)->size != 0) {
 //        pop(stack);
 //    }
@@ -90,7 +91,10 @@ char *top(Stack **stack) {
 ////    free((*stack));
 //    /*new free*/
 //    free((*stack));
-//}
+
+    munmap((*stack)->init_addr,sizeof (node)*10);
+
+}
 
 void printStack(Stack **stack) {
     for (node *i = (*stack)->head; i != NULL; i = i->next) {
@@ -100,35 +104,3 @@ void printStack(Stack **stack) {
 }
 
 
-//int main() {
-//
-//
-//    Stack *new_n = (Stack *) my_malloc(sizeof(Stack));
-//    new_n->head = (node *) my_malloc(sizeof(node));
-//    new_n->head->next = NULL;
-//    strcpy(new_n->head->data, "ddd");
-//
-//    printf("data %s \n", new_n->head->data);
-//    node *p = new_n->head;
-//    //my_free(new_n->head);
-//
-//
-//
-//    printf("data %s \n", p->data);
-//    new_n->head = (node *) my_malloc(sizeof(node));
-//    strcpy(new_n->head->data, "test");
-//
-//
-//
-////    Stack *s = (Stack *) malloc(sizeof(Stack));
-////    s->head = NULL;
-////
-////    push(&s, "ok");
-////    push(&s,"bye");
-////    printStack(&s);
-////
-////    free_stack(&s);
-//
-//    return 0;
-//
-//}

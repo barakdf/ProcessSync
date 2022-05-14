@@ -14,7 +14,8 @@ typedef struct node {
 
 
 typedef struct stack {
-    char *st_adrr;
+    char *st_addr;
+    char *init_addr;
     node *head;
     int size;
 } Stack;
