@@ -44,9 +44,10 @@ struct flock lock;
 int fd;
 
 
+
 void sig_handler(int signum) {
     free_stack(&shared_st);
-    munmap(&shared_st,sizeof (Stack));
+    munmap(&shared_st, sizeof(Stack));
     server_running = 0;
     close(new_fd);
 
@@ -91,6 +92,7 @@ void *server_listener(void *arg) {
     char client_msg[text_length] = {0}; // '\0'
 
 
+
     while (1) {
 
         memset(client_msg, 0, text_length);
@@ -104,6 +106,14 @@ void *server_listener(void *arg) {
 
         if (r != 0) {
             /** --------------------------------- STACK SECTION ---------------------------------*/
+            fd = open("./demo.txt", O_WRONLY);
+            memset(&lock, 0, sizeof(lock));
+            lock.l_type = F_WRLCK;
+            fcntl(fd, F_SETLKW, &lock);
+            printf(" lock  \n");
+
+
+
 
             /**------------ TOP ------------*/
             /* if the given command is TOP, the server will send the client the top value in the shared stack.*/
@@ -147,12 +157,17 @@ void *server_listener(void *arg) {
                 /* ~END~ Write DATA CRITICAL SECTION */
 
             }
+            sleep(3);
+            printf("unlock \n ");
+            lock.l_type = F_ULOCK;
+            fcntl(fd, F_SETLKW, &lock);
+
+
         } else {
             break;
         }
 
-//        lock.l_type = F_ULOCK;
-//        fcntl(fd,F_SETLKW, &lock);
+
     }
 }
 
@@ -162,12 +177,10 @@ int main(void) {
     /* INIT the server shared stack */
 //    shared_st = (Stack *) malloc(sizeof(Stack));
 
-    shared_st = (Stack *)mmap(NULL, sizeof (Stack), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
+    shared_st = (Stack *) mmap(NULL, sizeof(Stack), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
     stack_Init(&shared_st);
 
 
-    memset(&lock, 0, sizeof(lock));
-//    shared_st->head = NULL;
 
 
 
@@ -229,7 +242,7 @@ int main(void) {
         exit(1);
     }
 
-//    signal(SIGINT, sig_handler);
+    signal(SIGINT, sig_handler);
 
     sa.sa_handler = sigchld_handler; // reap all dead processes
     sigemptyset(&sa.sa_mask);
@@ -257,15 +270,13 @@ int main(void) {
         printf("server: got connection from %s\n", s);
 
 
+
+
         if (!fork()) { // this is the child process
 //        close(sockfd); // child doesn't need the listener
 
+            printf(" init lock \n");
 
-//            fd = open("demo.txt",O_WRONLY);
-//            printf(" init lock \n");
-//            lock.l_type = F_WRLCK;
-//            fcntl(fd,F_SETLKW, &lock);
-//            printf( " lock \n");
             server_listener(&new_fd);
 
 
