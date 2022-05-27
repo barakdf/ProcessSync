@@ -21,7 +21,6 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <pthread.h>
-#include <fcntl.h>
 #include "stack.c"
 #include <unistd.h>
 #include "assert.h"
@@ -39,9 +38,6 @@ Stack *test_st;
 int server_running = 1;
 int sockfd;
 int new_fd;
-struct flock lock;
-
-int fd;
 
 
 
@@ -93,8 +89,8 @@ void *server_listener(void *arg) {
 
 
 
-    while (1) {
 
+    while (1) {
         memset(client_msg, 0, text_length);
         size_t r; //size of byte
 
@@ -106,11 +102,7 @@ void *server_listener(void *arg) {
 
         if (r != 0) {
             /** --------------------------------- STACK SECTION ---------------------------------*/
-            fd = open("./demo.txt", O_WRONLY);
-            memset(&lock, 0, sizeof(lock));
-            lock.l_type = F_WRLCK;
-            fcntl(fd, F_SETLKW, &lock);
-            printf(" lock  \n");
+
 
 
 
@@ -157,18 +149,12 @@ void *server_listener(void *arg) {
                 /* ~END~ Write DATA CRITICAL SECTION */
 
             }
-            sleep(3);
-            printf("unlock \n ");
-            lock.l_type = F_ULOCK;
-            fcntl(fd, F_SETLKW, &lock);
-
-
         } else {
             break;
         }
-
-
     }
+//    close(*s);
+    return NULL;
 }
 
 
@@ -184,7 +170,7 @@ int main(void) {
 
 
 
-    int status;
+    int dummy_df = dummy_file();
 
     /* Connection methods start here -> */
     // listen on sock_fd, new connection on new_fd
@@ -256,7 +242,10 @@ int main(void) {
 
 
     while (server_running) {  // main accept() loop
+
+
         sin_size = sizeof their_addr;
+
         new_fd = accept(sockfd, (struct sockaddr *) &their_addr, &sin_size);
         if (new_fd == -1) {
             perror("accept");
@@ -273,20 +262,19 @@ int main(void) {
 
 
         if (!fork()) { // this is the child process
-//        close(sockfd); // child doesn't need the listener
 
-            printf(" init lock \n");
 
             server_listener(&new_fd);
 
 
-            close(new_fd);
-            exit(0);
 
+            close(sockfd);
+
+//            close(sockfd); // child doesn't need the listener
 
         }
     }
-    close(new_fd);  // parent doesn't need this
+//    close(new_fd);  // parent doesn't need this
 
     return 0;
 }
