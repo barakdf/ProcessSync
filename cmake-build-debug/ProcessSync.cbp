@@ -79,7 +79,7 @@
 		<Unit filename="/mnt/c/Users/97252/Documents/GitHub/ProcessSync/Test.c">
 			<Option target="ProcessSync"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.c">
+		<Unit filename="/mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.cpp">
 			<Option target="ProcessSync"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/97252/Documents/GitHub/ProcessSync/stack.h">

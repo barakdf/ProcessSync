@@ -59,6 +59,7 @@ void sigchld_handler(int s) {
 
     while (waitpid(-1, NULL, WNOHANG) > 0);
 
+
     errno = saved_errno;
 }
 
@@ -231,6 +232,7 @@ int main(void) {
     }
 
     signal(SIGINT, sig_handler);
+
 
     sa.sa_handler = sigchld_handler; // reap all dead processes
     sigemptyset(&sa.sa_mask);

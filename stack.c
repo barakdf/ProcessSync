@@ -13,18 +13,6 @@
 
 struct flock lock;
 int dummy_fd;
-/* O_WRONLY ->
- * O_CREAT -> */
-
-int dummy_file() {
-    dummy_fd = open("dummy_df.txt", O_WRONLY | O_CREAT);
-    if (dummy_fd == -1) {
-        perror("Error at opening the dummy_file\n");
-    }
-    memset(&lock, 0, sizeof(lock));
-    return dummy_fd;
-}
-
 void stack_Init(Stack **pStack) {
     char *memory_ptr = (char *) mmap(NULL, sizeof(node) * 10, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1,
                                      0);
@@ -34,6 +22,20 @@ void stack_Init(Stack **pStack) {
     }
     (*pStack)->st_addr = memory_ptr;
     (*pStack)->init_addr = memory_ptr;
+}
+
+/**
+ * This method is used for create a dummy file that wil used as synchronized lock.
+ */
+/* O_WRONLY -> write only
+ * O_CREAT ->  if pathname does not exist, create it as a regular file. */
+int dummy_file() {
+    dummy_fd = open("dummy_df.txt", O_WRONLY | O_CREAT);
+    if (dummy_fd == -1) {
+        perror("Error at opening the dummy_file\n");
+    }
+    memset(&lock, 0, sizeof(lock));
+    return dummy_fd;
 }
 
 void *stack_malloc(Stack **pStack) {
@@ -54,7 +56,7 @@ void push(Stack **stack, char *text) {
 
 
     /* CRITICAL SECTION */
-    sleep(1);
+
     node *new_node = (node *) stack_malloc(stack);
     strcpy(new_node->data, text);
 
@@ -89,7 +91,7 @@ void pop(Stack **stack) {
 
 
     /* CRITICAL SECTION */
-    sleep(1);
+
     if ((*stack)->head == NULL) {
 //        printf("Empty stack \n");
         return;
@@ -131,8 +133,8 @@ char *top(Stack **stack) {
 
 
     /* CRITICAL SECTION */
-    sleep(1);
-    printf("Finish_sleep\n");
+
+//    printf("Finish_sleep\n");
     if ((*stack)->size == 0) {
 //        perror("ERROR: Stack is empty");
         /* Free the lock */

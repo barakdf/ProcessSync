@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/mnt/c/Users/97252/Documents/GitHub/ProcessSync/Test.c" "/mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles/ProcessSync.dir/Test.c.o"
-  "/mnt/c/Users/97252/Documents/GitHub/ProcessSync/server.c" "/mnt/c/Users/97252/Documents/GitHub/ProcessSync/cmake-build-debug/CMakeFiles/ProcessSync.dir/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

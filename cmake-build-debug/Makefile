@@ -150,33 +150,6 @@ Test.c.s:
 	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/Test.c.s
 .PHONY : Test.c.s
 
-server.o: server.c.o
-
-.PHONY : server.o
-
-# target to build an object file
-server.c.o:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/server.c.o
-.PHONY : server.c.o
-
-server.i: server.c.i
-
-.PHONY : server.i
-
-# target to preprocess a source file
-server.c.i:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/server.c.i
-.PHONY : server.c.i
-
-server.s: server.c.s
-
-.PHONY : server.s
-
-# target to generate assembly for a file
-server.c.s:
-	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/server.c.s
-.PHONY : server.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +162,6 @@ help:
 	@echo "... Test.o"
 	@echo "... Test.i"
 	@echo "... Test.s"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
 .PHONY : help
 
 

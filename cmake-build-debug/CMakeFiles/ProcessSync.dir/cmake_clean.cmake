@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ProcessSync.dir/Test.c.o"
-  "CMakeFiles/ProcessSync.dir/server.c.o"
   "ProcessSync"
   "ProcessSync.pdb"
 )
