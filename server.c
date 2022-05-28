@@ -147,6 +147,10 @@ void *server_listener(void *arg) {
                 /* ~END~ Write DATA CRITICAL SECTION */
 
             }
+            else if (strcmp("EXIT", client_msg) == EQUAL){
+                close(new_fd);
+
+            }
         } else {
             break;
         }

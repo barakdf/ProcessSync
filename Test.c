@@ -101,19 +101,21 @@ int main(int argc, char *argv[]) {
 
 
 
-    pid_t dad = getpid();
+    pid_t pid_p = getpid();
+
     for (size_t i = 0; i < 2; i++) {
         if (fork() == 0) {
             break;
         }
     }
 
-    if (dad == getpid()) {
 
+    if (pid_p == getpid()) {
+        sleep(3);
 
-        printf("----- Dad is running -------- \n");
-        printf("%d\n", dad);
-        sleep(2);
+        printf("----- parent is running -------- \n");
+        printf("%d\n", pid_p);
+
 
 
         printf("----- TOP TEST -------- \n");
@@ -217,9 +219,8 @@ int main(int argc, char *argv[]) {
 
         printf(" %d ---> Pushing to stack.. \n",getpid());
         if (send(c_sock, "PUSH hello", text_length, 0) == -1) {
-            printf("push s not working \n");
-            perror("send");
-
+            printf("push is not working \n");
+            exit(1);
         }
     }
 

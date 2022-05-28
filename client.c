@@ -111,10 +111,12 @@ int main(int argc, char *argv[]) {
 
 
         if(strcmp("EXIT", command) == EQUAL) {
+            send(c_sock, command, text_length, 0);
+            close(c_sock);
             break;
         }
 
-        if (strcmp("TOP", command) == EQUAL || strcmp("PEEK", command) == EQUAL ) {
+        if (strcmp("TOP", command) == EQUAL  ) {
 //            printf("%s\n", command);
 //            printf("print client \n ");
             /* send the TOP command to the server */
@@ -142,9 +144,6 @@ int main(int argc, char *argv[]) {
             }
         }
         else if (strcmp("POP", command) == EQUAL || strncmp("PUSH",command, 4) == EQUAL) {
-            send(c_sock, command, 1024, 0);
-        }
-        else if(strcmp("DEQUEUE", command) == EQUAL || strncmp("ENQUEUE",command, 4) == EQUAL) {
             send(c_sock, command, 1024, 0);
         }
 
