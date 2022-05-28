@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/ProcessSync.dir/server.c.o  -o ProcessSync 
+/usr/bin/cc -g   CMakeFiles/ProcessSync.dir/server.c.o CMakeFiles/ProcessSync.dir/Test.c.o  -o ProcessSync 

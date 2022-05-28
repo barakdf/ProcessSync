@@ -3,4 +3,4 @@ project(ProcessSync C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(ProcessSync server.c stack.h)
+add_executable(ProcessSync server.c stack.h Test.c)

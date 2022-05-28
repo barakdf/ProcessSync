@@ -54,7 +54,7 @@ void push(Stack **stack, char *text) {
 
 
     /* CRITICAL SECTION */
-    sleep(4);
+    sleep(1);
     node *new_node = (node *) stack_malloc(stack);
     strcpy(new_node->data, text);
 
@@ -89,7 +89,7 @@ void pop(Stack **stack) {
 
 
     /* CRITICAL SECTION */
-    sleep(4);
+    sleep(1);
     if ((*stack)->head == NULL) {
 //        printf("Empty stack \n");
         return;
@@ -131,7 +131,7 @@ char *top(Stack **stack) {
 
 
     /* CRITICAL SECTION */
-    sleep(4);
+    sleep(1);
     printf("Finish_sleep\n");
     if ((*stack)->size == 0) {
 //        perror("ERROR: Stack is empty");

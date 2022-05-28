@@ -123,6 +123,33 @@ ProcessSync/fast:
 	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/build
 .PHONY : ProcessSync/fast
 
+Test.o: Test.c.o
+
+.PHONY : Test.o
+
+# target to build an object file
+Test.c.o:
+	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/Test.c.o
+.PHONY : Test.c.o
+
+Test.i: Test.c.i
+
+.PHONY : Test.i
+
+# target to preprocess a source file
+Test.c.i:
+	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/Test.c.i
+.PHONY : Test.c.i
+
+Test.s: Test.c.s
+
+.PHONY : Test.s
+
+# target to generate assembly for a file
+Test.c.s:
+	$(MAKE) -f CMakeFiles/ProcessSync.dir/build.make CMakeFiles/ProcessSync.dir/Test.c.s
+.PHONY : Test.c.s
+
 server.o: server.c.o
 
 .PHONY : server.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ProcessSync"
+	@echo "... Test.o"
+	@echo "... Test.i"
+	@echo "... Test.s"
 	@echo "... server.o"
 	@echo "... server.i"
 	@echo "... server.s"

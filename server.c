@@ -105,8 +105,6 @@ void *server_listener(void *arg) {
 
 
 
-
-
             /**------------ TOP ------------*/
             /* if the given command is TOP, the server will send the client the top value in the shared stack.*/
             if (strcmp("TOP", client_msg) == EQUAL) {
