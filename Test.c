@@ -97,10 +97,6 @@ int main(int argc, char *argv[]) {
     printf("\n ---- START MY TEST ---- \n");
 
 
-
-
-
-
     pid_t pid_p = getpid();
 
     for (size_t i = 0; i < 2; i++) {
@@ -117,9 +113,14 @@ int main(int argc, char *argv[]) {
         printf("%d\n", pid_p);
 
 
-
         printf("----- TOP TEST -------- \n");
-        /* send the TOP command to the server */
+        /**
+         * TOP TEST:
+         *
+         *  step 1: send the TOP command to the server
+         *  step 2: receive the data from the server stack
+         *  step 3: Check equality at the returned data ( should be "hello" from child processes push action) .*/
+
         if (send(c_sock, "TOP", text_length, 0) == -1) {
             exit(1);
         }
@@ -142,19 +143,26 @@ int main(int argc, char *argv[]) {
             printf("Test fail from some reason \n");
             exit(1);
         }
-        memset(top,0,text_length);
+        memset(top, 0, text_length);
+        /** END OF TOP TEST */
 
 
 
 
         printf("----- POP TEST -------- \n");
+        /** POP TEST:
+         * send to the server the command POP in order to delete the top of the stack. */
         send(c_sock, "POP", text_length, 0);
         sleep(2);
 
 
-
-
         printf("----- TOP TEST 2 -------- \n");
+        /**
+      * TOP TEST 2: check if the data that returned from the server stack is still hello.
+      *
+      *  step 1: send the TOP command to the server
+      *  step 2: receive the data from the server stack
+      *  step 3: Check equality at the returned data ( should be "hello" from child processes push action) .*/
         if (send(c_sock, "TOP", text_length, 0) == -1) {
             exit(1);
         }
@@ -175,13 +183,15 @@ int main(int argc, char *argv[]) {
             printf("Test fail from some reason \n");
             exit(1);
         }
-        memset(top,0,text_length);
+        memset(top, 0, text_length);
+        /** END OF TOP TEST */
 
 
 
 
         printf("----- POP TEST 2 -------- \n");
-
+        /** POP TEST:
+         * send to the server the command POP in order to delete the top of the stack. */
         if (send(c_sock, "POP", text_length, 0) == -1) {
             exit(1);
         }
@@ -189,6 +199,13 @@ int main(int argc, char *argv[]) {
 
 
         printf("----- TOP TEST 3 -------- \n");
+        /**
+     * TOP TEST 2: check if the server returned "stack empty Error".
+     *
+     *  step 1: send the TOP command to the server
+     *  step 2: receive the data from the server stack
+     *  step 3: Check equality at the returned data ( should be "hello" from child processes push action) .
+         *  */
         if (send(c_sock, "TOP", text_length, 0) == -1) {
             exit(1);
         }
@@ -200,7 +217,6 @@ int main(int argc, char *argv[]) {
         top[numb] = '\0';
 
 
-
         if (strcmp(top, "ERROR: Stack is empty") == EQUAL) {
             printf("%s\n", top);
             printf("Test pass\n");
@@ -208,7 +224,8 @@ int main(int argc, char *argv[]) {
             printf("Test fail from some reason \n");
             exit(1);
         }
-        memset(top,0,text_length);
+        memset(top, 0, text_length);
+        /** END OF TOP TEST */
 
 
         printf("--- ALL TESTS WERE DONE ------\n");
@@ -216,8 +233,8 @@ int main(int argc, char *argv[]) {
         send(c_sock, "EXIT", text_length, 0);
 
     } else {
-
-        printf(" %d ---> Pushing to stack.. \n",getpid());
+        /** each child process send PUSH hello to the server , expected -> 2 total hello */
+        printf(" %d ---> Pushing to stack.. \n", getpid());
         if (send(c_sock, "PUSH hello", text_length, 0) == -1) {
             printf("push is not working \n");
             exit(1);
